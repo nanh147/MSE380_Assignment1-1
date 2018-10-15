@@ -15,7 +15,7 @@ m = p*L*L*L;
 j = 0.5*m*r^2;
 %% system matrices
 %%input
-a = [-b/m -1/m 0 0; k 0 0 0 ; 0 0 0 1; -b*r/j -r/j -b_theta/j -1/j];
+a = [-b/m -1/m 0 0; k 0 0 0 ; -b*r/j -r/j -b_theta/j -1/j; 0 0 k_theta 0];
 b1 = [1/m; 0; r/j; 0];
 b2 = [1/m; 0; r/j; 0];
 %%output
