@@ -9,9 +9,10 @@ L=0.15;
 r=0.75;
 h=0.1;
 m = p*L*L*L;
-j = (pi*0.75^4)/32;
-a = [b/m 0 k/m 0;-b*r/j b_theta/j -r*k/j k_theta/j;1 0 0 0;0 1 0 0];
-b = [-1/m -1;-r/j -r*m/j;0 0;0 0];
+j = 0.5*m*r^2;
+a = [b/m 0 1/m 0; b*r/j b_theta/j r/j 1/j; 1 0 0 0;0 1 0 0];
+bf = [1/m;-r/j;0;0];
+bg = [1/m;-r/j;0;0];
 c = [0 0 1/k 0;0 0 0 1/k_theta];
 d=0;
 x = [0;0;0;0];
@@ -20,18 +21,18 @@ y=[];
 n=15/0.005;
 ft(1:1,1:n+1) =0;
 ft(1,1) = 100;
-i=0;
+i=1;
 g(1:1,1:n+1) = 9.81;
 ut = [ft;g];
-for t = 0:0.005:15
-    i = i+1;
-    x = x + x_diff*0.005;
-    x_diff = a*x+b*ut(:,i);
-    y = [y c*x];
+for t = 0:0.0005:15
+    x_diff = a*x(:,i) + bf.*ft(:,i) + bg.*g(:,i);
+    x(:,i+1) = x(:,i) + x_diff.*dt;
+    y(:,i) = c*x(:,i);
+    i=i+1;
 end
-figure
-p = plot(t_mat,y(1,:));
-hold on
-figure
-p2 = plot(t_mat,y(2,:));
-hold on
+figure;
+plot(t_mat,y(1,:),t_mat,y(2,:));
+title('Euler Method State Models Part b');
+xlabel('Time (s)');
+ylabel('Displacement (m)');
+legend('Linear displacement','Angular displacement');
