@@ -1,6 +1,6 @@
 %%mathematical model
 %% input
-dt = 0.0005;
+dt = 0.01;
 t = 0:dt:15;
 t_mat = vec2mat(t,1);
 b=20;
@@ -15,11 +15,11 @@ m = p*L*L*L;
 j = 0.5*m*r^2;
 %% system matrices
 %%input
-a = [0 1 0 0; -k/m -b/m 0 0 ; 0 0 1 0; -k*r/j -b*r/j -k_theta/j -b_theta/j];
-b1 = [0; 1/m; 0; r/j];
-b2 = [0; 1/m; 0; r/j];
+a = [-b/m -1/m 0 0; k 0 0 0 ; 0 0 0 1; -b*r/j -r/j -b_theta/j -1/j];
+b1 = [1/m; 0; r/j; 0];
+b2 = [1/m; 0; r/j; 0];
 %%output
-c = [1 0 0 0; 0 0 1 0];
+c = [0 1/k 0 0; 0 0 0 1/k_theta];
 d1 = [0;0];
 d2 = [0;0];
 %% state vectors
@@ -39,9 +39,9 @@ for t = 0:dt:15
     i=i+1;
 end
 %% plot
-figure
-p1 = plot(t_mat,y(1,:));
-% hold on
-% figure
-% p2 = plot(t_mat,y(3,:));
-% hold on
+figure;
+plot(t_mat,y(1,:),t_mat,y(2,:));
+title('Euler Method State Models Part c');
+xlabel('Time (s)');
+ylabel('Displacement (m)');
+legend('Linear displacement','Angular displacement');
