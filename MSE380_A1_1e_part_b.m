@@ -1,3 +1,4 @@
+close all; clear all; clc;
 %%mathematical model
 %% input
 dt = 0.01;
