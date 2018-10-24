@@ -17,7 +17,7 @@ j = 0.5*(p*h*pi*(r^2))*(r^2);
 %% system matrices
 %%input
 a = [0 1 0 -r; -k/m -b/m 0 0; 0 0 0 1; k*r/j b*r/j -k_theta/j -b_theta/j];
-b1 = [0 0; 1/m 1; 0 0; 0 m*r/j]; %%2 columns for 2 inputs ft & g
+b1 = [0 0; 1/m 1; 0 0; 0 0]; %%2 columns for 2 inputs ft & g
 %%output
 c = [1 0 0 0; 0 0 1 0];
 d = [0 0;0 0]; %%2 columns for 2 inputs ft & g

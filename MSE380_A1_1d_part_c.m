@@ -17,7 +17,7 @@ j = 0.5*(p*h*pi*(r^2))*(r^2);
 %%input
 a = [-b/m -1/m 0 0; k 0 -k*r 0 ; b*r/j r/j -b_theta/j -1/j; 0 0 k_theta 0];
 b1 = [1/m; 0; 0; 0];
-b2 = [1; 0; m*r/j; 0];
+b2 = [1; 0; 0; 0];
 %%output
 c = [0 1/k 0 0; 0 0 0 1/k_theta];
 d1 = [0;0];
