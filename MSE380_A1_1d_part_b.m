@@ -17,7 +17,7 @@ j = 0.5*(p*h*pi*(r^2))*(r^2); %%use mass of inertia
 %%input
 a = [0 1 0 -r; -k/m -b/m 0 0; 0 0 0 1; k*r/j b*r/j -k_theta/j -b_theta/j];
 b1 = [0; 1/m; 0; 0];
-b2 = [0; 1; 0; m*r/j];
+b2 = [0; 1; 0; 0];
 %%output
 c = [1 0 0 0; 0 0 1 0];
 d1 = [0;0];
@@ -40,7 +40,7 @@ end
 %% plot
 figure;
 plot(t_mat,y(1,:),t_mat,y(2,:));
-title('Euler Method State Model Part b');
+title('Euler Method State Models Part b');
 xlabel('Time (s)');
 ylabel('Displacement (m)');
 legend('Linear displacement','Angular displacement');
