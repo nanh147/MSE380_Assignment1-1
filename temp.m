@@ -1,0 +1,20 @@
+function f = temp(t,T_oil,Tw,Tamb)
+r = 0.4;
+co = 1970; %specific heat oil
+po = 850;
+ds = 0.05;
+k = 2;
+l = 1;
+cw = 4190; %specific heat water
+pw = 1000;
+% h = 100;
+To = 100;
+Ro = 0.001;
+Co = po*(4/3)*pi()*(r^3)*co; %sphere thermal capacitance
+Cw = pw*(l^3)*cw; %tank thermal capacitance
+% Rc = Ro*(To/Tw); %convective resistance
+Rk = ds/(k*4*pi()*(r^2)); %conductive resistance
+f = zeros(2,1);
+f(1) = (-1/(Co*Rk))*T_oil+(1/(Co*Rk))*Tw; %1 for oil, 2 for water 
+f(2) = (1/(Cw*Rk))*T_oil+(-1/(Cw*Rk)+(2*Tw)/(Cw*Ro*To))*Tw+(1/(Cw*Ro*To))*Tamb;   
+end
