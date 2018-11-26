@@ -1,0 +1,26 @@
+function f = temp(t,T)
+r = 0.4;
+co = 1970; %specific heat oil
+po = 850;
+ds = 0.05;
+k = 2;
+l = 1;
+cw = 4190; %specific heat water
+pw = 1000;
+% h = 100;
+To = 100;
+Ro = 0.001;
+Co = po*(4/3)*pi()*(r^3)*co; %sphere thermal capacitance
+Cw = pw*(l^3)*cw; %tank thermal capacitance
+Rc = Ro*To/T(2); %convective resistance
+Rk = ds/(k*4*pi()*(r^2)); %conductive resistance
+T_amb_discrete = [10 13 16 19 23 24 22 20 17 14 10];
+hours = 0:length(T_amb_discrete)-1;
+% Time = 0:(length(T_amb_discrete)-1)*3600-1; %hours -> seconds
+T_amb = interp1(hours,T_amb_discrete,t/3600,'spline');
+A = [-1/(Co*Rk) 1/(Co*Rk); 1/(Cw*Rk) (-1/Cw)*(1/Rk+1/Rc)];
+B = [0; 1/(Cw*Rc)];
+f = zeros(2,1);
+f(1) = A(1,1)*T(1)+A(1,2)*T(2)+B(1)*T_amb;
+f(2) = A(2,1)*T(1)+A(2,2)*T(2)+B(2)*T_amb;
+end
